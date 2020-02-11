@@ -1,0 +1,8 @@
+/service-a/target/
+/service-a/.settings/
+/service-a/.classpath
+/service-a/.project
+/service-b/target/
+/service-b/.settings/
+/service-b/.classpath
+/service-b/.project
