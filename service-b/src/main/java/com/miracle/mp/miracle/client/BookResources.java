@@ -7,7 +7,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
 @Path("books")
-public class ServiceController {
+public class BookResources {
 
     @Inject
     private BookService bookService;
