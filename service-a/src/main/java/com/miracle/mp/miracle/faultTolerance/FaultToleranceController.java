@@ -1,8 +1,6 @@
 package com.miracle.mp.miracle.faultTolerance;
 
 import java.time.LocalTime;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Future;
 import java.util.concurrent.ThreadLocalRandom;
 
 import javax.ws.rs.GET;
