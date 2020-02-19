@@ -2,13 +2,18 @@ package com.miracle.mp.miracle.client;
 
 public class Book {
 
+    private Long id;
+
     private String name;
 
     private double price;
 
-    public Book(String name, double price) {
-        this.name = name;
-        this.price = price;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
