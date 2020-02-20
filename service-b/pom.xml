@@ -8,7 +8,7 @@
   <packaging>war</packaging>
   <properties>
     <openliberty.maven.version>3.1</openliberty.maven.version>
-    <final.name>mp-miracle</final.name>
+    <final.name>service-b</final.name>
     <failOnMissingWebXml>false</failOnMissingWebXml>
     <openliberty.version>[19.0.0.9,)</openliberty.version>
     <maven.compiler.source>1.8</maven.compiler.source>
@@ -24,7 +24,7 @@
     </dependency>
   </dependencies>
   <build>
-    <finalName>mp-miracle</finalName>
+    <finalName>service-b</finalName>
   </build>
   <profiles>
     <profile>

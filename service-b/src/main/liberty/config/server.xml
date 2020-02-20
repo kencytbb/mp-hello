@@ -3,7 +3,10 @@
 
     <featureManager>
         <feature>microProfile-3.2</feature>
+        <feature>usr:opentracingZipkin-0.31</feature>
     </featureManager>
+
+    <opentracingZipkin host="zipkin" port="9411"/>
 
     <httpEndpoint id="defaultHttpEndpoint"
                   httpPort="9081"

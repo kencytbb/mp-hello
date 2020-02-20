@@ -1,0 +1,18 @@
+version: "2.1"
+services:
+  service-b:
+    build: service-b/
+    ports:
+      - "9081:9081"
+      - "9444:9444"
+    links:
+      - zipkin
+      - service-a
+  service-a:
+    build: service-a/
+    links:
+      - zipkin
+  zipkin:
+    image: openzipkin/zipkin
+    ports:
+      - "9411:9411"
