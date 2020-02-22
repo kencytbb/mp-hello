@@ -1,7 +1,5 @@
 package com.miracle.mp.miracle.config;
 
-import java.util.List;
-
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -20,8 +18,8 @@ public class ConfigTestController {
     private String injectedValue;
 
     @Inject
-    @ConfigProperty(name = "injected.users")
-    private List<String> teamMembers;
+    @ConfigProperty(name = "author")
+    private String author;
 
     @Path("/injected")
     @GET
@@ -29,12 +27,10 @@ public class ConfigTestController {
         return "Config value as Injected by CDI " + injectedValue;
     }
 
-    @Path("/injectuser")
+    @Path("/author")
     @GET
-    public void  getInjectUserConfigValue() {
-         for(String member: teamMembers){
-             System.out.println("Member's name: " + member);
-         }
+    public String  getInjectUserConfigValue() {
+         return author;
     }
 
     @Path("/lookup")
