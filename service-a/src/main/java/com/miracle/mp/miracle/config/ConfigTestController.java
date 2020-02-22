@@ -21,6 +21,11 @@ public class ConfigTestController {
     @ConfigProperty(name = "author")
     private String author;
 
+    @Inject
+    @ConfigProperty(name = "user")
+    private String user;
+
+
     @Path("/injected")
     @GET
     public String getInjectedConfigValue() {
@@ -29,8 +34,15 @@ public class ConfigTestController {
 
     @Path("/author")
     @GET
-    public String  getInjectUserConfigValue() {
+    public String  getInjectAuthorConfigValue() {
          return author;
+    }
+
+
+    @Path("/user")
+    @GET
+    public String  getInjectUserConfigValue() {
+         return user;
     }
 
     @Path("/lookup")
