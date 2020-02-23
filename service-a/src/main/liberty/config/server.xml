@@ -12,11 +12,4 @@
     <webApplication location="${project.name}.war" contextRoot="/service-a"/>
     <mpMetrics authentication="false"/>
 
-
-    <keyStore id="defaultKeyStore" location="public.jks" type="JKS" password="atbash" />
-
-
-
-    <mpJwt id="jwtUserConsumer" keyName="theKeyId" issuer="${jwt.issuer}"/>
-
 </server>

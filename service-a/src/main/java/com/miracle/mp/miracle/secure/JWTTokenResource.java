@@ -5,6 +5,8 @@ import java.security.Principal;
 import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
@@ -12,7 +14,7 @@ import javax.ws.rs.core.Response;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 
 @RequestScoped
-@Path("miracle")
+@Path("jwt")
 public class JWTTokenResource {
 		
 	@Inject
@@ -36,8 +38,10 @@ public class JWTTokenResource {
 	}
 	
 	@GET
-	@Path("principal")
-	public Response getJWTPrincipal() {
-		return Response.ok(principal.getName()).build();
+	public Response getExampleForJWT() {
+		JsonObject miracle = Json.createObjectBuilder()
+							.add("team", "miracle")
+							.add("members", "7").build();
+		return Response.ok(miracle).build();
 	}
 }
