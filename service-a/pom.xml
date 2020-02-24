@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<?xml version="1.0" encoding="UTF-8" ?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.miracle</groupId>
   <artifactId>mp-miracle-service-a</artifactId>
@@ -15,6 +14,12 @@
     <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
   <dependencies>
+    <dependency>
+      <groupId>jakarta.platform</groupId>
+      <artifactId>jakarta.jakartaee-api</artifactId>
+      <version>8.0.0</version>
+      <scope>provided</scope>
+    </dependency>
     <dependency>
       <groupId>org.eclipse.microprofile</groupId>
       <artifactId>microprofile</artifactId>
@@ -63,9 +68,35 @@
               <serverName>${final.name}</serverName>
               <bootstrapProperties>
                 <project.name>${final.name}</project.name>
-                <jwt.issuer>https://server.example.com</jwt.issuer>
+                <jwt.issuer>microprofile</jwt.issuer>
               </bootstrapProperties>
             </configuration>
+          </plugin>
+         
+          <plugin>
+            <artifactId>maven-resources-plugin</artifactId>
+            <version>3.1.0</version>
+            <executions>
+              <execution>
+                <id>copy-resources-to-liberty</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>copy-resources</goal>
+                </goals>
+                <configuration>
+                  <outputDirectory>${basedir}/target/liberty/wlp/usr/servers/${final.name}/resources</outputDirectory>
+                  <resources>          
+                    <resource>
+                      <directory>src/main/liberty/resources</directory>
+                      <includes>
+                        <include>**/*.json</include>
+                      </includes>
+                      <filtering>true</filtering>
+                    </resource>
+                  </resources>              
+                </configuration>            
+              </execution>
+            </executions>
           </plugin>
         </plugins>
       </build>

@@ -1,52 +1,43 @@
 package com.miracle.mp.miracle.client;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
-import javax.json.Json;
-import javax.json.JsonArray;
-import javax.json.JsonObject;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
+import org.eclipse.microprofile.rest.client.RestClientBuilder;
+import org.eclipse.microprofile.rest.client.RestClientDefinitionException;
+
+@Stateless
 @Path("books")
-@ApplicationScoped
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public class BookResource {
 
-    private JsonArray books;
+    @Inject
+    private BookService bookService;
 
-    @PostConstruct
-    public void setup() {
-
-        JsonObject bookOne = Json.createObjectBuilder()
-                .add("id", 1)
-                .add("title", "MicroProfile 3.0")
-                .build();
-
-        JsonObject bookTwo = Json.createObjectBuilder()
-                .add("id", 2)
-                .add("title", "Jakarta EE 8")
-                .build();
-
-        JsonObject bookThree = Json.createObjectBuilder()
-                .add("id", 3)
-                .add("title", "Java 13")
-                .build();
-
-        this.books = Json.createArrayBuilder()
-                .add(bookOne)
-                .add(bookTwo)
-                .add(bookThree)
-                .build();
-
+    @GET
+    @Path("all-books-by-mp-rest-client")
+    public List<Book> allByCDI() {
+        return bookService.all();
     }
 
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getAvailableBooks() {
-        return Response.ok(this.books).build();
+    @Path("all-books-by-mp-rest-client-builder")
+    public List<Book> allByRestClientBuilder()
+            throws IllegalStateException, RestClientDefinitionException, URISyntaxException {
+        BookClient bookClient = RestClientBuilder.newBuilder()
+                                    .baseUri(new URI("http://localhost:9081/data/books"))
+                                    .build(BookClient.class);
+        return bookClient.all();
     }
-
+    
 }
