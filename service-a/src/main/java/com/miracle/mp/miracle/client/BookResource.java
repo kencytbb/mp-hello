@@ -35,9 +35,8 @@ public class BookResource {
     public List<Book> allByRestClientBuilder()
             throws IllegalStateException, RestClientDefinitionException, URISyntaxException {
         BookClient bookClient = RestClientBuilder.newBuilder()
-                                    .baseUri(new URI("http://localhost:9081/data/books"))
-                                    .build(BookClient.class);
+                .baseUri(new URI("http://localhost:9081/service-b/data/books")).build(BookClient.class);
         return bookClient.all();
     }
-    
+
 }
